@@ -11,6 +11,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+
     public List<User> getAll() {
 
         return this.userRepository.findAll();
@@ -22,7 +23,10 @@ public class UserService {
     }
 
     public User add(User user) {
-
+        Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
+        if (userOptional.isPresent()) {
+            throw new IllegalStateException("email déjà présent !");
+        }
         return this.userRepository.save(user);
     }
 
@@ -34,11 +38,15 @@ public class UserService {
         existingUser.setFirstname(user.getFirstname());
         existingUser.setLastname(user.getLastname());
         existingUser.setPassword(user.getPassword());
-        existingUser.setRole(user.getRole());
+//        existingUser.setRole("ROLE_USER");
         return userRepository.save(user);
     }
 
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public Optional<User> getByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
 }

@@ -21,7 +21,9 @@ public class Advice {
     private Long id;
 
     private String title;
+
     private String content;
+
     private Integer rating;
 
     @ManyToOne

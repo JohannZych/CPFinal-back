@@ -27,7 +27,7 @@ public class User {
     private String lastname;
     private String email;
     private String password;
-    private String role;
+    private String role = "ROLE_USER";
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties("user")

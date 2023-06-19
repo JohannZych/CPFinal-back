@@ -1,5 +1,6 @@
 package com.wcs.cpfinal.advice;
 
+import com.wcs.cpfinal.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class AdviceService {
 
     public List<Advice> getAll() {
 
-        return this.adviceRepository.findAll();
+        return this.adviceRepository.findAllByOrderByIdDesc();
     }
 
     public Optional<Advice> getById(Long id) {
@@ -38,5 +39,9 @@ public class AdviceService {
 
     public void delete(Long id) {
         this.adviceRepository.deleteById(id);
+    }
+
+    public List<Advice> getByUser(Long id) {
+        return this.adviceRepository.findByUser(id);
     }
 }

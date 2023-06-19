@@ -25,6 +25,12 @@ public class UserController {
         return userService.getById(id);
     }
 
+    @GetMapping("/email/{email}")
+    private Optional<User> getByEmail(@PathVariable("email") String email) {
+
+        return userService.getByEmail(email);
+    }
+
     @PostMapping("/add")
     private User add(@RequestBody User user) {
 

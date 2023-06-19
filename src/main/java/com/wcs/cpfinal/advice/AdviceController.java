@@ -1,5 +1,6 @@
 package com.wcs.cpfinal.advice;
 
+import com.wcs.cpfinal.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,14 @@ public class AdviceController {
         return adviceService.getAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     private Optional<Advice> getById(@PathVariable("id") Long id) {
         return adviceService.getById(id);
+    }
+
+    @GetMapping("/user/{id}")
+    private List<Advice> getByUser(@PathVariable("id") Long id) {
+        return adviceService.getByUser(id);
     }
 
     @PostMapping("/add")
